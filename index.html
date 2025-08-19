@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bhumireddy Ramanatha Reddy — Creative Portfolio</title>
+
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root { --acc: 255 99 72; }
+      html { scroll-behavior: smooth; }
+      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji','Segoe UI Emoji'; }
+      .gradient-bg { background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.1), transparent 70%); }
+      .ring-anim { position: relative; isolation: isolate; }
+      .ring-anim::before { content: ""; position: absolute; inset: -6px; border-radius: 9999px; background: conic-gradient(from var(--angle), rgba(var(--acc)/.2), rgba(var(--acc)/1)); filter: blur(6px); z-index: -1; animation: spin 6s linear infinite; }
+      @keyframes spin { to { --angle: 360deg; } }
+    </style>
+  </head>
+  <body class="bg-zinc-950 text-zinc-100">
+    <canvas id="stars"></canvas>
+
+    <section class="relative overflow-hidden">
+      <div class="gradient-bg absolute inset-0 opacity-60 -z-1"></div>
+
+      <main id="home" class="container mx-auto px-4 py-20 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold">Bhumireddy <span class="text-[color:rgb(var(--acc))]">Ramanatha</span> Reddy</h1>
+        <p class="mt-4 text-zinc-300">Tech Explorer • Bridging Circuits & Code</p>
+
+        <div class="mt-8 flex flex-col items-center gap-6">
+          <div class="ring-anim p-2 rounded-full w-56 h-56 md:w-72 md:h-72">
+            <img id="profile-photo" alt="Profile Photo" class="w-full h-full object-cover rounded-full border border-white/10 shadow-2xl" src="assets/photo.jpg"/>
+          </div>
+
+          <div class="flex gap-4 flex-wrap justify-center">
+            <a href="assets/hard resume.pdf" download class="px-4 py-2 bg-white/10 rounded-xl hover:bg-white/20">⬇️ Hardware Resume</a>
+            <a href="assets/softresume.pdf" download class="px-4 py-2 bg-white/10 rounded-xl hover:bg-white/20">⬇️ Technical Resume</a>
+          </div>
+
+          <div class="mt-4 flex flex-wrap gap-4 justify-center text-sm text-zinc-300">
+            <a href="mailto:brr7438@gmail.com">✉️ brr7438@gmail.com</a>
+            <a href="tel:+918074462372">📱 +91 8074462372</a>
+            <span>📍 Andhra Pradesh, India</span>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <script>
+      // Fallback if main photo isn't found
+      const img = document.getElementById('profile-photo');
+      img.onerror = () => {
+        const candidates = ['photo.jpeg','photo.png','profile.jpg','profile.png'];
+        for (const file of candidates) {
+          const testImg = new Image();
+          testImg.src = 'assets/' + file;
+          testImg.onload = () => { img.src = testImg.src; };
+        }
+        // If still nothing, set default avatar
+        setTimeout(() => { if (!img.src || img.src.includes('assets/photo.jpg')) img.src = 'https://via.placeholder.com/300x300.png?text=No+Photo'; }, 1000);
+      };
+    </script>
+  </body>
+</html>
